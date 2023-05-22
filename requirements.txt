@@ -10,3 +10,4 @@ seaborn
 statsmodels
 colour
 dash_bootstrap_components
+pip
