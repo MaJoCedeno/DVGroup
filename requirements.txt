@@ -1,5 +1,5 @@
 gunicorn
-pip install --upgrade pip
+pip
 pandas
 numpy
 requests
