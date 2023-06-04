@@ -461,7 +461,7 @@ def update_fig2(type_num_val):
     # Add the first bar plot for 2019
     fig2.add_trace(
         go.Bar(x=df2_dd[mask]['y_2019'], y=df2_dd[mask]['Type_Number_or_Value'], orientation='h',
-               text=df2_n_srt['labels19'], textposition='inside', showlegend=False,
+               text=df2_dd[mask]['labels19'], textposition='inside', showlegend=False,
                marker=dict(color=df2_n_srt['Payment_Instrument'].map(
                    {k: pal_ecb2[i] for i, k in enumerate(['Cards', 'Cash', 'Other', 'Mobile app'])}))),
         row=1, col=1
@@ -470,7 +470,7 @@ def update_fig2(type_num_val):
     # Add the second bar plot for 2022
     fig2.add_trace(
         go.Bar(x=df2_dd[mask]['y_2022'], y=df2_dd[mask]['Type_Number_or_Value'], orientation='h',
-               text=df2_n_srt['labels22'], textposition='inside', showlegend=False,
+               text=df2_dd[mask]['labels22'], textposition='inside', showlegend=False,
                marker=dict(color=df2_n_srt['Payment_Instrument'].map(
                    {k: pal_ecb2[i] for i, k in enumerate(['Cards', 'Cash', 'Other', 'Mobile app'])}))),
         row=2, col=1
