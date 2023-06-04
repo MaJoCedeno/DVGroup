@@ -336,8 +336,13 @@ layout = html.Div([
 
                 html.Div([
                     dcc.Dropdown(
-                        id="dropdown", options=["Number of payments", "Value of payments"],
-                        value="Number of payments", persistence=True, persistence_type='local', clearable=False, ),
+                        id="dropdown",
+                        options=["Number of payments", "Value of payments"],
+                        value="Number of payments",
+                        persistence=True,
+                        persistence_type='local',
+                        clearable=False,
+                        style={'font-size': '20px'}),
 
                     html.Br(),
 
@@ -349,16 +354,16 @@ layout = html.Div([
                                 html.Div([
                                     html.H2('PAYMENT METHOD | USAGE RATE | 2019 VS 2022',
                                             style={'margin-bottom': '10px'}),
-                                    html.H4('Share of payment instruments used at POS', style={'margin-bottom': '0px'}),
+                                    html.H3('Share of payment instruments used at POS', style={'margin-bottom': '0px'}),
                                     dcc.Graph(id="chart2", style={'text-align': 'center'}),
                                 ], className='box'),
                                 html.Br(),
 
                                 html.Div([
                                     html.H2('CASH | PREFERENCE RATE CHANGE'),
-                                    html.H4('Preference for Cash: Evolution from Year 2019 to 2022, per Country',
+                                    html.H3('Preference for Cash: Evolution from Year 2019 to 2022, per Country',
                                             style={'margin-bottom': '10px'}),
-                                    html.H4('Is there a change in Cash preference rate?',
+                                    html.H3('Is there a change in Cash preference rate?',
                                             style={'margin-bottom': '0px'}),
                                     dcc.Graph(id='bar_graph_20_2', figure=fig20)], className='box',
                                     style={'text-align': 'center',
@@ -369,8 +374,8 @@ layout = html.Div([
 
                             html.Div([
                                 html.H2('CASH | USAGE RATE 2022'),
-                                html.H4('Share of Cash as a Payment Instrument Used at POS in 2022, per country'),
-                                html.H4('Who has the highest/lowest share of cash usage?'),
+                                html.H3('Share of Cash as a Payment Instrument Used at POS in 2022, per country'),
+                                html.H3('Who has the highest/lowest share of cash usage?'),
                                 html.Br(),
                                 html.Br(),
                                 html.Div([

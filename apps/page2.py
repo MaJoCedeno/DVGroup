@@ -145,13 +145,13 @@ layout = html.Div([
                     dcc.Dropdown(
                         id='year-dropdown',
                         options=[{'label': str(year), 'value': year} for year in years],
-                        value=years[0],
+                        value=years[0], persistence=True, persistence_type='local',
                         style={'width': '100%', 'margin-right': '10px', 'margin-bottom': '10px'}
                     ),
                     dcc.Dropdown(
                         id='category-dropdown',
                         options=[{'label': category, 'value': category} for category in categories],
-                        value=categories[0],
+                        value=categories[0], persistence=True, persistence_type='local',
                         style={'width': '100%', 'margin-right': '10px', 'margin-bottom': '10px'}
                     ),
                     dcc.Dropdown(
@@ -160,7 +160,7 @@ layout = html.Div([
                             {'label': 'Number of Payments', 'value': 'number'},
                             {'label': 'Value of Payments', 'value': 'value'}
                         ],
-                        value='number',
+                        value='number', persistence=True, persistence_type='local',
                         style={'width': '100%'}
                     ),
                 ],
