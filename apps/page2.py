@@ -301,8 +301,7 @@ def update_nested_donut(year, category, transaction_type):
     labels = [category] + payment_methods
 
     colors = [
-        '#52b788', '#058c42', '#2ec4b6', '#7209b7', '#52b788',
-        '#40916c', '#2d6a4f', '#1b4332'
+        '#228b22', '#058c42', '#4EA8DE', '#FB8B24'
     ]
 
     # Create donut chart figure
@@ -321,13 +320,13 @@ def update_nested_donut(year, category, transaction_type):
 
     fig.update_layout(
         autosize=False,
-        width=500,
-        height=500,
+        width=600,
+        height=600,
         margin=dict(t=50, l=50, r=50, b=50),  # adding margin as a spacer
         # margin=dict(t=0, l=0, r=0, b=0),
         title={
             'text': f'<b>Structure of POS payments by payment instrument</b>',
-            'y': 0.95,
+            'y': 0.93,
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top'
