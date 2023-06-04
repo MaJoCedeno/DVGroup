@@ -89,7 +89,7 @@ layout = html.Div([
                 dcc.RadioItems(
                     id='payment_radio',
                     options=[{'label': i, 'value': i} for i in ['Cash', 'Cards', 'Mobile', 'Online', 'Other']],
-                    value='Cash',
+                    value='Cash', persistence=True, persistence_type='local',
                     labelStyle={'display': 'inline-block', 'padding': '5px 10px',
                                 'border': '1px solid #ccc', 'border-radius': '4px',
                                 'margin-right': '10px'},
@@ -122,7 +122,7 @@ layout = html.Div([
                 dcc.Dropdown(
                     id='filter_dropdown',
                     options=[{'label': i, 'value': i} for i in ['Income', 'Age', 'Education']],
-                    value='Income',
+                    value='Income', persistence=True, persistence_type='local',
                     style={'width': '200px', 'margin-right': '150px'}
                 ),
                 dcc.Graph(id='bar_plot')

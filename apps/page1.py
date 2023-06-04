@@ -337,7 +337,7 @@ layout = html.Div([
                 html.Div([
                     dcc.Dropdown(
                         id="dropdown", options=["Number of payments", "Value of payments"],
-                        value="Number of payments", clearable=False, ),
+                        value="Number of payments", persistence=True, persistence_type='local', clearable=False, ),
 
                     html.Br(),
 
@@ -419,7 +419,7 @@ layout = html.Div([
                             id='method_radio',
                             options=[{'label': 'Why Cash?', 'value': 'Cash'},
                                      {'label': 'Why Card?', 'value': 'Card'}],
-                            value='Cash'),
+                            value='Cash', persistence=True, persistence_type='local'),
                         dcc.Graph(id="treemap_reason"),
                     ], style={'text-align': 'center', 'display': 'inline-block'}, className='box'),
 
