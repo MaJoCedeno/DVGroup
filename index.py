@@ -4,8 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 # Connect to main app.py file
-from app import app
-from app import server
+from app import app, server
 
 # Connect to your app pages
 from apps import page1, page2
@@ -15,7 +14,7 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('Page 1', href='/apps/page1', style={
-            'background-color': '#9ad6e3',
+            'background-color': '#DDB892',
             'color': 'white',
             'padding': '14px 25px',
             'text-align': 'center',
@@ -27,7 +26,7 @@ app.layout = html.Div([
             'margin-top': '20px'
         }),
         dcc.Link('Page 2', href='/apps/page2', style={
-            'background-color': '#9ad6e3',
+            'background-color': '#00b4d8',  #9ad6e3
             'color': 'white',
             'padding': '14px 25px',
             'text-align': 'center',
@@ -35,7 +34,7 @@ app.layout = html.Div([
             'display': 'inline-block',
             'border-radius': '25px',  # Add border-radius property for rounded corners
             'margin-right': '10px',
-            'margin-top':'20px'
+            'margin-top': '20px'
         }),
     ], className="row"),
     html.Div(id='page-content', children=[])
@@ -50,8 +49,6 @@ app.css.append_css({
     )
 })
 
-
-
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
@@ -64,4 +61,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, port=8011)
