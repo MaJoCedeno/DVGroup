@@ -22,7 +22,9 @@ app.layout = html.Div([
             'text-decoration': 'none',
             'display': 'inline-block',
             'border-radius': '25px',  # Add border-radius property for rounded corners
-            'margin-right': '10px'
+            'margin-right': '10px',
+            'margin-left': '10px',
+            'margin-top': '20px'
         }),
         dcc.Link('Page 2', href='/apps/page2', style={
             'background-color': '#9ad6e3',
@@ -32,7 +34,8 @@ app.layout = html.Div([
             'text-decoration': 'none',
             'display': 'inline-block',
             'border-radius': '25px',  # Add border-radius property for rounded corners
-            'margin-right': '10px'
+            'margin-right': '10px',
+            'margin-top':'20px'
         }),
     ], className="row"),
     html.Div(id='page-content', children=[])
