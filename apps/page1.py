@@ -324,7 +324,7 @@ layout = html.Div([
                  style={'height': '8%', 'position': 'relative', 'opacity': '80%'}),
         html.Label('CONSUMER PAYMENT TRENDS | EURO AREA | 2019-2022'),
 
-    ], id='1_div', style={'display': 'flex', 'height': '8%'}),
+    ], id='1_div', style={'display': 'flex', 'height': '8%', 'margin-top': '30px','margin-left': '10px'}),
 
     # # #
     html.Div([
