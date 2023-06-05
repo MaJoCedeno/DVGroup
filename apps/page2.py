@@ -89,7 +89,7 @@ layout = html.Div([
                 dcc.RadioItems(
                     id='payment_radio',
                     options=[{'label': i, 'value': i} for i in ['Cash', 'Cards', 'Mobile', 'Online', 'Other']],
-                    value='Cash', persistence=True, persistence_type='local',
+                    value='Cash',
                     labelStyle={'display': 'inline-block', 'padding': '5px 10px',
                                 'border': '1px solid #ccc', 'border-radius': '4px',
                                 'margin-right': '10px'},
