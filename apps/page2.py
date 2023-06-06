@@ -2,8 +2,8 @@
 import pandas as pd
 import dash
 from dash import dcc, html
-import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import plotly.express as px
 from app import app
@@ -84,97 +84,127 @@ layout = html.Div([
     html.Div([
         html.Div(
             [
-                html.Label('Payment Method:', style={'font-weight': 'bold', 'margin-bottom': '30px'}),
+                html.Label('Payment Method:', style={'font-weight': 'bold', 'margin-bottom': '50px'}),
                 html.Br(),
-                dcc.RadioItems(
+                dbc.RadioItems(
                     id='payment_radio',
                     options=[{'label': i, 'value': i} for i in ['Cash', 'Cards', 'Mobile', 'Online', 'Other']],
                     value='Cash',
-                    labelStyle={'display': 'inline-block', 'padding': '5px 10px',
-                                'border': '1px solid #ccc', 'border-radius': '4px',
-                                'margin-right': '10px'},
-                    inputStyle={'display': 'none'},  # Hide the radio button input
-                    style={'display': 'inline-block', 'margin-top': '30px'}
+                    persistence=True,
+                    persistence_type='local',
+                    inline=True,
+                    labelClassName="date-group-labels",
+                    labelCheckedClassName="date-group-labels-checked",
+                    className="date-group-items",
                 )
+                , html.P(id="output"),
             ],
-            style={'width': '100%', 'text-align': 'center', 'margin-bottom': '30px'}
+            style={
+                'width': '100%',
+                'text-align': 'center',
+                'margin-bottom': '50px'
+            }
         ),
         html.Div(
             [
                 dcc.Graph(id='v_transaction')
             ],
-            style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top'}
+            style={
+                'width': '50%',
+                'display': 'inline-block',
+                'vertical-align': 'top',
+            }
         ),
         html.Div(
             [
                 dcc.Graph(id='n_transaction')
             ],
-            style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top', 'margin-bottom': '100px'}
+            style={
+                'width': '50%',
+                'display': 'inline-block',
+                'vertical-align': 'top',
+                'margin-bottom': '100px',
+            }
         ),
     ],
-        style={'width': '100%', 'text-align': 'center'}
+        style={
+            'width': '100%',
+            'text-align': 'center'
+        }
     ),
-    html.Div([
-        # New order of divs in Block 2 & 3
-        html.Div([
-            # Block 2
-            html.Div([
-                dcc.Dropdown(
-                    id='filter_dropdown',
-                    options=[{'label': i, 'value': i} for i in ['Income', 'Age', 'Education']],
-                    value='Income', persistence=True, persistence_type='local',
-                    style={'width': '200px', 'margin-right': '150px'}
-                ),
-                dcc.Graph(id='bar_plot')
-            ],
-                style={'width': '100%', 'height': '100%', 'display': 'flex',
-                       'justify-content': 'center', 'align-items': 'center'}
-            ),
-        ],
-            style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top'}),
-
-        html.Div([
-            # Block 3
-            html.Div([
-                dcc.Graph(
-                    id='nested-donut-chart',
-                    style={'height': '100%', 'width': '70%', 'justify-content': 'center', 'align-items': 'center',
-                           'margin-left': '300px'}
-                ),
-                html.Div([
-                    dcc.Dropdown(
-                        id='year-dropdown',
-                        options=[{'label': str(year), 'value': year} for year in years],
-                        value=years[0], persistence=True, persistence_type='local',
-                        style={'width': '100%', 'margin-right': '10px', 'margin-bottom': '10px'}
-                    ),
-                    dcc.Dropdown(
-                        id='category-dropdown',
-                        options=[{'label': category, 'value': category} for category in categories],
-                        value=categories[0], persistence=True, persistence_type='local',
-                        style={'width': '100%', 'margin-right': '10px', 'margin-bottom': '10px'}
-                    ),
-                    dcc.Dropdown(
-                        id='transaction-type-dropdown',
-                        options=[
-                            {'label': 'Number of Payments', 'value': 'number'},
-                            {'label': 'Value of Payments', 'value': 'value'}
+    # Re-structured Block 2 & 3 using inline styles
+    html.Div(
+        [
+            html.Div(
+                [
+                    # Block 2
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                id='filter_dropdown',
+                                options=[{'label': i, 'value': i} for i in ['Income', 'Age', 'Education']],
+                                value='Income',
+                                persistence=True,
+                                persistence_type='local',
+                                style={'width': '100%'}
+                            ),
+                            dcc.Graph(id='bar_plot')
                         ],
-                        value='number', persistence=True, persistence_type='local',
-                        style={'width': '100%'}
+                        style={'width': '50%', 'height': '100%', 'margin': '0 auto'}
                     ),
                 ],
-                    style={'display': 'flex', 'flex-direction': 'column', 'justify-content': 'center', 'width': '30%',
-                           'margin-top': '20px', 'margin-right': '50px'}
-                ),
-            ],
-                style={'display': 'flex', 'width': '100%', 'height': '100%', 'justify-content': 'space-between'}
+                style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top'}
+            ),
+
+            html.Div(
+                [
+                    # Block 3
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                id='year-dropdown',
+                                options=[{'label': str(year), 'value': year} for year in years],
+                                value=years[0],
+                                persistence=True,
+                                persistence_type='local',
+                                style={'width': '100%', 'margin-right': '20px'}
+                            ),
+                            dcc.Dropdown(
+                                id='category-dropdown',
+                                options=[{'label': category, 'value': category} for category in categories],
+                                value=categories[0],
+                                persistence=True,
+                                persistence_type='local',
+                                style={'width': '100%', 'margin-right': '20px'}
+                            ),
+                            dcc.Dropdown(
+                                id='transaction-type-dropdown',
+                                options=[
+                                    {'label': 'Number of Payments', 'value': 'number'},
+                                    {'label': 'Value of Payments', 'value': 'value'}
+                                ],
+                                value='number',
+                                persistence=True,
+                                persistence_type='local',
+                                style={'width': '100%'}
+                            ),
+                        ],
+                        style={'margin-bottom': '20px', 'margin-right': '30px', 'display': 'flex'}
+                    ),
+                    dcc.Graph(
+                        id='nested-donut-chart',
+                        style={'height': '100%', 'width': '100%', 'margin-left': '330px'}
+                    ),
+                ],
+                style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top'}
             ),
         ],
-            style={'width': '50%', 'display': 'inline-block', 'vertical-align': 'top'}),
-    ],
-        style={'width': '100%', 'text-align': 'center'})
-])
+        style={'width': '100%', 'text-align': 'center'}
+    ),
+],
+    style={'width': '100%', 'text-align': 'center'}
+)
+
 
 # Define function to generate choropleth map
 def generate_map(payment_method, transaction_type, colorscale, zoom):
@@ -214,7 +244,11 @@ def generate_map(payment_method, transaction_type, colorscale, zoom):
     fig_1.update_layout(
         margin=dict(t=50, b=0, r=0, l=0), # Reduce spacing in the graph
         height=600, # Adjust the height of the map
-        coloraxis_colorbar=dict(title=""),
+        coloraxis_colorbar=dict(
+            title="",
+            x=0.9,  # Change the x position
+            # y=0.5  # Change the y position (if needed)
+        ),
     )
 
     return fig_1
@@ -263,7 +297,7 @@ def update_plot(filter_option):
         barmode='group',
         title={
             'text': f'<b>Distribution of population per {filter_option} groups by payment method</b>',
-            'y': 0.95,
+            'y': 0.93,
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
@@ -271,8 +305,8 @@ def update_plot(filter_option):
         },
         xaxis_title='Payment Method',
         yaxis_title='Percentage',
-        width=700,
-        height=500,
+        width=800,
+        height=600,
         plot_bgcolor='white',
         paper_bgcolor='white',
     )
