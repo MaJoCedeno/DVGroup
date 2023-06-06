@@ -1,5 +1,4 @@
 import dash_core_components as dcc
-import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
@@ -21,9 +20,11 @@ app.layout = html.Div([
             'text-decoration': 'none',
             'display': 'inline-block',
             'border-radius': '25px',  # Add border-radius property for rounded corners
-            'margin-right': '10px',
-            'margin-left': '10px',
-            'margin-top': '20px'
+            'margin-right': '10px',  # space between the buttons
+            'width': '120px',  # or whatever width you desire
+            'margin-bottom': '20px',
+            'margin-top': '20px',
+            'margin-left': '20px'
         }),
         dcc.Link('Page 2', href='/apps/page2', style={
             'background-color': '#00b4d8',  #9ad6e3
@@ -34,20 +35,14 @@ app.layout = html.Div([
             'display': 'inline-block',
             'border-radius': '25px',  # Add border-radius property for rounded corners
             'margin-right': '10px',
+            'width': '120px',  # or whatever width you desire
+            'margin-bottom': '20px',
             'margin-top': '20px'
         }),
     ], className="row"),
     html.Div(id='page-content', children=[])
 ])
 
-# Add hover and active styles
-app.css.append_css({
-    'external_url': (
-        'a:hover, a:active {'
-        'background-color: green;'
-        '}'
-    )
-})
 
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
