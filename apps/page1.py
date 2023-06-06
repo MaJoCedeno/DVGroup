@@ -211,7 +211,7 @@ fig20 = px.bar(
     orientation='h',
     text='Country',  # write country name inside a bar
     color=np.where(df20_sorted['Diff_ 19-20'] < 0, 'Negative change', 'Positive change'),
-    color_discrete_map={'Negative change': '#003299', 'Positive change': '#00ffff'},  # #996700
+    color_discrete_map={'Negative change': '#0077b6', 'Positive change': '#00a896'},  # #996700
     hover_name="CTRY",
     labels={'y_2019': '2019 RATE', 'y_2022': '2022 RATE', 'Change in pp': 'CHANGE 2019-2022 in pp',
             },
@@ -232,7 +232,9 @@ for i, row in df20_sorted.iterrows():
         xshift=15 if row['Diff_ 19-20'] >= 0 else -18
     )
 # Ensure Country label stays inside  a bar regardless window size
-fig20.update_traces(width=0.7, textposition='inside', insidetextanchor='start')
+fig20.update_traces(width=0.7, textposition='inside', insidetextanchor='start', textfont=dict(size=24))
+
+fig20.update_xaxes(tickfont=dict(size=18))  # adjust the size
 
 # Set the labels and title
 fig20.update_layout(
@@ -260,8 +262,8 @@ fig20.update_layout(
         size=12,
         # color="RebeccaPurple"
     ),
-    width=600,
-    height=500
+    width=800,
+    height=600
 )
 # fig20.show()
 # ## TOPIC 1_ GRAPH 1.2 (Chart 20) ############ END ###
@@ -290,8 +292,8 @@ layout_access1 = go.Layout(  # title='Ease of access to cash withdrawals in the 
             y=1,
             font=dict(size=50, family='Tableau Book'),
 
-        )], width=650, height=380,
-    margin=dict(t=20, l=50, r=0, b=0),
+        )], width=700, height=500,
+    margin=dict(t=40, l=200, r=0, b=0),
     legend=dict(
         x=0.5,
         y=0.5,
@@ -342,7 +344,7 @@ layout = html.Div([
                         persistence=True,
                         persistence_type='local',
                         clearable=False,
-                        style={'font-size': '20px'}),
+                        style={'font-size': '20px', 'margin-bottom': '20px'}),
 
                     html.Br(),
 
@@ -355,21 +357,22 @@ layout = html.Div([
                                     html.H2('PAYMENT METHOD | USAGE RATE | 2019 VS 2022',
                                             style={'margin-bottom': '10px'}),
                                     html.H3('Share of payment instruments used at POS', style={'margin-bottom': '0px'}),
-                                    dcc.Graph(id="chart2", style={'text-align': 'center'}),
+                                    dcc.Graph(id="chart2", style={'text-align': 'center', 'margin-bottom': '20px',
+                                                                  'margin-left': '100px'}),
                                 ], className='box'),
                                 html.Br(),
 
                                 html.Div([
                                     html.H2('CASH | PREFERENCE RATE CHANGE'),
                                     html.H3('Preference for Cash: Evolution from Year 2019 to 2022, per Country',
-                                            style={'margin-bottom': '10px'}),
+                                            style={'margin-bottom': '10px', 'margin-left': '30px'}),
                                     html.H3('Is there a change in Cash preference rate?',
                                             style={'margin-bottom': '0px'}),
                                     dcc.Graph(id='bar_graph_20_2', figure=fig20)], className='box',
                                     style={'text-align': 'center',
                                            'display': 'inline-block'}),
 
-                            ], style={'text-align': 'center'},
+                            ], style={'text-align': 'center', 'bottom-top': '30px'},
                             ),
 
                             html.Div([
@@ -393,7 +396,7 @@ layout = html.Div([
                                 html.Br(),
                                 html.Br(),
 
-                                dcc.Graph(id='chart5'),
+                                dcc.Graph(id='chart5', style={'margin-left': '130px'}),
 
                             ], style={'text-align': 'center', 'height': '20%'}
                             ),
@@ -424,7 +427,10 @@ layout = html.Div([
                             id='method_radio',
                             options=[{'label': 'Why Cash?', 'value': 'Cash'},
                                      {'label': 'Why Card?', 'value': 'Card'}],
-                            value='Cash', persistence=True, persistence_type='local'),
+                            value='Cash',
+                            persistence=True,
+                            persistence_type='local',
+                            style={'font-size': '20px'}),
                         dcc.Graph(id="treemap_reason"),
                     ], style={'text-align': 'center', 'display': 'inline-block'}, className='box'),
 
@@ -435,7 +441,7 @@ layout = html.Div([
                         html.H4('How easy do they find it to get to an ATM or a bank to withdraw cash?',
                                 style={'margin-bottom': '2px'}),
                         dcc.Graph(id='pie_access', figure=fig_access1)
-                    ], style={'text-align': 'center', 'display': 'inline-block'})
+                    ], style={'text-align': 'center', 'display': 'inline-block', 'margin-left': '250px'})
                 ], style={'display': 'flex'}),
 
                 html.Div([
@@ -484,13 +490,13 @@ def update_fig2(type_num_val):
         row=2, col=1
     )
     # Update layout and axis settings
-    fig2.update_layout(width=600, height=150,
+    fig2.update_layout(width=600, height=200,
                        plot_bgcolor='rgba(0, 0, 0, 0)', paper_bgcolor='rgba(0, 0, 0, 0)',
                        margin=dict(t=30, l=20, r=5, b=2),
                        title=dict(
                            text=f'{type_num_val}',
-                           x=0.01,
-                           y=0.90,
+                           x=0.5,
+                           y=0.95,
                            font=dict(family='Tableau Book', color='grey')
                        ),
                        showlegend=False, font_family='Tableau Book')
@@ -517,8 +523,8 @@ def update_fig5(type_num_val):
     fig5 = px.scatter(df5_both_dd[mask5], x='X_coor', y='Y_coor',
                       color=df5_both_dd[mask5]['Diff_ 19-20'].apply(lambda x: 'Increase in cash preference' if x > 0
                       else 'Decrease in cash preference'),
-                      color_discrete_map={'Decrease in cash preference': '#003299',
-                                          'Increase in cash preference': '#00ffff'},
+                      color_discrete_map={'Decrease in cash preference': '#0077b6',
+                                          'Increase in cash preference': '#00a896'},
                       size='Cash', text='labels', size_max=40, hover_name="CTRY",
                       labels={'Cash': 'Cash Used 2022 RATE', 'Card': 'Card Used 2022 RATE',
                               'Diff_ 19-20': 'Cash Preference CHANGE 2019-2022'},
@@ -537,11 +543,11 @@ def update_fig5(type_num_val):
                         'legend': {'x': 0.5, 'y': 0.5, 'bgcolor': 'rgba(0, 0, 0, 0)', 'yanchor': 'middle',
                                    'xanchor': 'center'}}, legend=dict(title='Color code', ),
                        width=650, height=650,
-                       margin=dict(t=10, l=0, r=0, b=20),
+                       margin=dict(t=50, l=0, r=0, b=20),
                        title=dict(
                            text=f'{type_num_val}',
-                           x=0.01,  # Place the title in the center of the figure
-                           y=0.96,
+                           x=0.5,  # Place the title in the center of the figure
+                           y=0.98,
                            font=dict(family='Tableau Book', color='grey')
                        ),
                        showlegend=True, uniformtext_minsize=8, font=dict(
@@ -574,8 +580,8 @@ def update_treemap(reason):
         margin=dict(t=20, l=25, r=25, b=25),
         showlegend=False,
         plot_bgcolor='white',
-        height=400,
-        width=650,
+        height=500,
+        width=750,
         colorway=color_range,
         coloraxis_showscale=False,
     )
@@ -596,7 +602,12 @@ def update_heatmap(id):
     z_percentage = np.round(z * 100, 2)
 
     colorscale = [[0, '#bee9e8'], [1, '#62b6cb']]
-    fig_access2 = ff.create_annotated_heatmap(z=z_percentage, x=x, y=y, colorscale=colorscale)
+    fig_access2 = ff.create_annotated_heatmap(
+        z=z_percentage,
+        x=x,
+        y=y,
+        colorscale=colorscale,
+    )
 
     # Update annotations to display values as percentages
     for i in range(len(fig_access2.layout.annotations)):

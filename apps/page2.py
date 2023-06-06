@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import plotly.express as px
+import polars as pl
 from app import app
 
 # This is to link with the app.py
@@ -205,19 +206,22 @@ layout = html.Div([
     style={'width': '100%', 'text-align': 'center'}
 )
 
+# Convert df_map to Polars
+pl_df_map = pl.DataFrame._from_pandas(df_map)
 
 # Define function to generate choropleth map
+
 def generate_map(payment_method, transaction_type, colorscale, zoom):
     # Construct the column name based on selected options
     column = f"{payment_method}_share_POS_{transaction_type}"
-    payment_title=f"{payment_method}"
-    transaction_title=f"{transaction_type}"
+    payment_title = f"{payment_method}"
+    transaction_title = f"{transaction_type}"
 
-    fig_1 = px.choropleth(df_map, locations='Country',
+    fig_1 = px.choropleth(pl_df_map.to_pandas(), locations='Country',
                         locationmode='country names',
                         color=column,
                         hover_name='Country',
-                        title =f'{payment_title} usage across Europe (in terms of {transaction_title} of transactions), 2022',
+                        title=f'{payment_title} usage across Europe (in terms of {transaction_title} of transactions), 2022',
                         color_continuous_scale=colorscale,
                         scope='europe')
 
@@ -242,8 +246,8 @@ def generate_map(payment_method, transaction_type, colorscale, zoom):
     )
 
     fig_1.update_layout(
-        margin=dict(t=50, b=0, r=0, l=0), # Reduce spacing in the graph
-        height=600, # Adjust the height of the map
+        margin=dict(t=50, b=0, r=0, l=0),  # Reduce spacing in the graph
+        height=600,  # Adjust the height of the map
         coloraxis_colorbar=dict(
             title="",
             x=0.9,  # Change the x position
