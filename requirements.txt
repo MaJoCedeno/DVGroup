@@ -12,5 +12,5 @@ statsmodels
 colour
 dash_bootstrap_components
 openpyxl
-U polars
+polars
 pyarrow
